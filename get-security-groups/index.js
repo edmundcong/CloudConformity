@@ -7,13 +7,25 @@ exports.handler = async (event, ctx) => {
         let data = (await fetchSecurityGroups()).SecurityGroups;
         data = constructSecurityGroupsArray(data);
         if (data.length === 0) {
-            return {id: awsRequestId, data: [], type: "array"}
+            return {
+                statusCode: 200,
+                headers: {"Content-Type": "application/vnd.api+json"},
+                body: []
+            }
         } else {
-            return {id: awsRequestId, data, type: "array"};
+            return {
+                statusCode: 200,
+                headers: {"Content-Type": "application/vnd.api+json"},
+                body: JSON.stringify({id: awsRequestId, data, type: "array"})
+            }
         }
     } catch (error) {
-        const status = error.code || "500";
+        const statusCode = error.code || "500";
         const detail  = error.message || "Internal Server Error.";
-        return {errors: [{status, detail}]};
+        return {
+            statusCode,
+            headers: {"Content-Type": "application/vnd.api+json"},
+            body: JSON.stringify({errors: [{status: statusCode, detail}]})
+        }
     }
 };
