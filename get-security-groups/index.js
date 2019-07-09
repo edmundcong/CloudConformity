@@ -6,9 +6,10 @@ exports.handler = async (event, ctx) => {
     const jsonApiHeaders = {"Content-Type": "application/vnd.api+json"};
 
     // client's requests need to specify the content type, and that content type needs to be vnd.api+json
-    if (!event.headers["Content-Type"] || event.headers["Content-Type"] !== "application/vnd.api+json") {
+    if (!event.headers ||
+        event.headers["Content-Type"] !== "application/vnd.api+json") {
         return {
-            statusCode: "406", headers: jsonApiHeaders,
+            statusCode: "415", headers: jsonApiHeaders,
             body: JSON.stringify({errors: [{status: "415", detail: "Unsupported Media Type"}]})
         };
     }

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/edmundcong/CloudConformity/issues"
   },
-  "homepage": "https://github.com/edmundcong/CloudConformity#readme"
+  "homepage": "https://github.com/edmundcong/CloudConformity#readme",
+  "dependencies": {
+    "mocha": "^6.1.4"
+  }
 }

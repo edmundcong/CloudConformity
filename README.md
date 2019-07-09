@@ -10,3 +10,13 @@ API Gateway + Lambda
 * Write a unit test for your module by mocking AWS EC2 API.
 * Get a code coverage report for your test suite.
 * Secure the endpoint using a custom API Gateway Lambda Authoriser (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
+
+File directory:
+* _ec2-security-groups_: NPM Module
+
+* _get-security-groups_: AWS Lambda function
+    * _node_modules_
+        * _ec2-security-groups_: NPM'd version of module
+        * all other modules omitted from repo
+    * _serverless.yml_: Serverless framework yaml file
+ 
