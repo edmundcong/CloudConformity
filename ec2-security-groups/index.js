@@ -13,6 +13,10 @@ const constructSecurityGroupsArray = (secGroupArr) => secGroupArr.map(secGroup =
     return { id: secGroup.GroupId, type: "GroupObject", attributes: { GroupName: secGroup.GroupName }}
 });
 
+/**
+ * Instantiate EC2 object, and fetch all our security groups and then return that raw object of security groups
+ * @returns {Promise<PromiseResult<EC2.DescribeSecurityGroupsResult, AWSError>>}
+ */
 const fetchSecurityGroups = async () => {
     // Create EC2 service object
     const ec2 = new AWS.EC2({apiVersion: '2016-11-15'});

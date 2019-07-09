@@ -21,6 +21,7 @@ exports.handler = async (event, ctx) => {
         };
     }
     try {
+        // call our module so we can extract only the parts of the security group's records we want (id, name, etc)
         let data = (await fetchSecurityGroups()).SecurityGroups;
         data = constructSecurityGroupsArray(data);
         if (data.length === 0) {
@@ -37,6 +38,7 @@ exports.handler = async (event, ctx) => {
             }
         }
     } catch (error) {
+        // if we're not provided any error code/message just default to 500 internal server error
         const statusCode = error.code || "500";
         const detail = error.message || "Internal Server Error.";
         return {
