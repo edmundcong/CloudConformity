@@ -1,5 +1,9 @@
 # package directories
 jspm_packages
+npm_modules
 
 # Serverless directories
 .serverless
+
+# do not ignore ec2-security-groups module
+!npm_modules/ec2-security-groups
