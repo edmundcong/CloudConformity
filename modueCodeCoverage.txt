@@ -1,0 +1,18 @@
+
+
+  fetchSecurityGroups
+    ✓ should succeed and return an object of ec2 security groups
+
+  constructSecurityGroupsArray
+    ✓ should return a well formatted object
+    ✓ should return empty array
+
+
+  3 passing (41ms)
+
+----------|----------|----------|----------|----------|-------------------|
+File      |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+----------|----------|----------|----------|----------|-------------------|
+All files |      100 |      100 |      100 |      100 |                   |
+ index.js |      100 |      100 |      100 |      100 |                   |
+----------|----------|----------|----------|----------|-------------------|

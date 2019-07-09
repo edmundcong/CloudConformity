@@ -1,0 +1,1 @@
+{"processes":{"98f8afcc-d628-4979-bccc-6cc7e2e69c8f":{"parent":null,"children":["b868fe10-f944-4e76-9ed4-8fa661d1959a"]},"b868fe10-f944-4e76-9ed4-8fa661d1959a":{"parent":"98f8afcc-d628-4979-bccc-6cc7e2e69c8f","children":[]}},"files":{"/Users/edmundcong/Documents/CloudConformity/get-security-groups/index.js":["b868fe10-f944-4e76-9ed4-8fa661d1959a"]},"externalIds":{}}
