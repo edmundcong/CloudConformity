@@ -7,7 +7,7 @@
 exports.handler = (event, context, callback) => {
     // Retrieve request parameters from the Lambda function input:
     const headers = event.headers;
-    if (headers.authorized === "true"){ // allow request to pass through if we have authorized head "true"
+    if (headers.Authorization === "true"){ // allow request to pass through if we have authorized head "true"
         // create and return policy to allow request to flow through to lambda
         const policy = createAllowPolicy("apiUser", event.methodArn);
         callback(null, policy);
