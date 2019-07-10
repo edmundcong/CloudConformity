@@ -14,7 +14,7 @@ exports.handler = async (event, ctx) => {
         };
     }
     // if a client requests with accept header then they must not have any appended media params
-    let acceptMediaParamsRegex = /application\/vnd\.api\+json(?!;)/; // check to make sure our accept header doesn't have media params
+    let acceptMediaParamsRegex = /application\/vnd\.api\+json(?!\s*;)/; // check to make sure our accept header doesn't have media params
     if (event.headers["Accept"] && !acceptMediaParamsRegex.test(event.headers["Accept"])) {
         return {
             statusCode: "406", headers: jsonApiHeaders,
