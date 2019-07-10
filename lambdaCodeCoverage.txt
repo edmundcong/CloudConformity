@@ -3,7 +3,7 @@
   getSecurityGroups
     ✓ fail as we haven't passed in content-type
     ✓ fail as we have passed in wrong content-type
-    ✓ fail as our client submitted correct Accept but wrong content-type
+    ✓ fail as our client submitted correct Accept with media param
     ✓ should succeed as we've successfully retrieved our security groups from our module
     ✓ should succeed and return an array of size 0
     ✓ should fail as we thrown an error

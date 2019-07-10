@@ -66,6 +66,11 @@ functions:
       - http:
           path: securityGroups
           method: get
+          authorizer:
+            name: authoriser
+            arn: arn:aws:lambda:us-west-2:154427961943:function:authoriser
+            identitySource: method.request.header.Authorization
+            type: request
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details

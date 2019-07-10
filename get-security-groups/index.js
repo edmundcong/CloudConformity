@@ -13,8 +13,9 @@ exports.handler = async (event, ctx) => {
             body: JSON.stringify({errors: [{status: "415", detail: "Unsupported Media Type"}]})
         };
     }
+    // regex for finding json api header with 0 or more whitespace then a ; after it (i.e. media params)
+    let acceptMediaParamsRegex = /application\/vnd\.api\+json(?!\s*;)/;
     // if a client requests with accept header then they must not have any appended media params
-    let acceptMediaParamsRegex = /application\/vnd\.api\+json(?!\s*;)/; // check to make sure our accept header doesn't have media params
     if (event.headers["Accept"] && !acceptMediaParamsRegex.test(event.headers["Accept"])) {
         return {
             statusCode: "406", headers: jsonApiHeaders,
