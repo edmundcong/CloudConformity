@@ -16,7 +16,7 @@ describe('fetchSecurityGroups', async () => {
             // stub out the call to the AWS SDK's describeSecurityGroups
             describeSecurityGroups: () => {
                 return {
-                    // stub out the call to the AWS object's promise
+                    //mock the resolved AWS response
                     promise: () => {
                         return { id: "1", data: {"SecurityGroups": [
                                     {"GroupName": "sec_group_1", "GroupId": "1"},

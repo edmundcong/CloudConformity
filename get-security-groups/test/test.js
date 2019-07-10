@@ -15,8 +15,8 @@ describe('getSecurityGroups', async () => {
         const result = await lambda.handler({headers: {"Content-Type": "binary"}}, {});
         result.should.have.property('statusCode').equal('415');
     });
-    it("fail as our client submitted correct Accept but wrong content-type", async () => {
-        const result = await lambda.handler({headers: {"Accept": "binary", "Content-Type":"application/vnd.api+json" }}, {});
+    it("fail as our client submitted correct Accept with media params", async () => {
+        const result = await lambda.handler({headers: {"Accept": "application/vnd.api+json; charset=utf-8", "Content-Type":"application/vnd.api+json" }}, {});
         result.should.have.property('statusCode').equal('406');
     });
     it("should succeed as we've successfully retrieved our security groups from our module", async () => {

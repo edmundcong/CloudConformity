@@ -13,8 +13,9 @@ exports.handler = async (event, ctx) => {
             body: JSON.stringify({errors: [{status: "415", detail: "Unsupported Media Type"}]})
         };
     }
-    // if a client does a request with an accept header, make sure they're looking to get returned vnd.api+json
-    if (event.headers["Accept"] && event.headers["Accept"] !== "application/vnd.api+json") {
+    // if a client requests with accept header then they must not have any appended media params
+    let acceptMediaParamsRegex = /application\/vnd\.api\+json(?!;)/; // check to make sure our accept header doesn't have media params
+    if (event.headers["Accept"] && !acceptMediaParamsRegex.test(event.headers["Accept"])) {
         return {
             statusCode: "406", headers: jsonApiHeaders,
             body: JSON.stringify({errors: [{status: "406", detail: "Not Acceptable"}]})

@@ -1,6 +1,7 @@
 # package directories
 jspm_packages
-npm_modules
+node_modules
+package.json
 
 # Serverless directories
 .serverless

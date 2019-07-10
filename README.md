@@ -13,10 +13,61 @@ API Gateway + Lambda
 
 File directory:
 * _ec2-security-groups_: NPM Module
-
+    * _test/test.js_ : Mocha + Chai + Proxyquire tests 
+    * _index.js_ : Module that we imported into our lambda function
 * _get-security-groups_: AWS Lambda function
     * _node_modules_
         * _ec2-security-groups_: NPM'd version of module
         * all other modules omitted from repo
+    * _index.js_ : `index.js` is our Lambda function (withour our module)
+    * _test/test.js_ : Mocha + Chai + Proxyquire tests 
     * _serverless.yml_: Serverless framework yaml file
+    
+    
+Code Coverage reports:
+
+_Lambda function:_
+```$xslt
+
+
+  getSecurityGroups
+    ✓ fail as we haven't passed in content-type
+    ✓ fail as we have passed in wrong content-type
+    ✓ fail as our client submitted correct Accept but wrong content-type
+    ✓ should succeed as we've successfully retrieved our security groups from our module
+    ✓ should succeed and return an array of size 0
+    ✓ should fail as we thrown an error
+
+
+  6 passing (42ms)
+
+----------|----------|----------|----------|----------|-------------------|
+File      |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+----------|----------|----------|----------|----------|-------------------|
+All files |      100 |      100 |      100 |      100 |                   |
+ index.js |      100 |      100 |      100 |      100 |                   |
+----------|----------|----------|----------|----------|-------------------|
+
+```
  
+ _Node Module_:
+ ```$xslt
+
+
+  fetchSecurityGroups
+    ✓ should succeed and return an object of ec2 security groups
+
+  constructSecurityGroupsArray
+    ✓ should return a well formatted object
+    ✓ should return empty array
+
+
+  3 passing (41ms)
+
+----------|----------|----------|----------|----------|-------------------|
+File      |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+----------|----------|----------|----------|----------|-------------------|
+All files |      100 |      100 |      100 |      100 |                   |
+ index.js |      100 |      100 |      100 |      100 |                   |
+----------|----------|----------|----------|----------|-------------------|
+```
