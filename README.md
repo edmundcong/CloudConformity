@@ -11,6 +11,14 @@ API Gateway + Lambda
 * Get a code coverage report for your test suite.
 * Secure the endpoint using a custom API Gateway Lambda Authoriser (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html)
 
+## How to hit the endpoint
+
+* do a `GET` on: https://wdzgnf4au8.execute-api.us-west-2.amazonaws.com/prod/securityGroups
+* Make sure your `Content-Type` header is set to `application/vnd.api+json`
+* Make sure your `Accept` header (if) set includes `application/vnd.api+json` without any media params
+* To test authorization please pass in `Authorization` header with value `true`
+* Example: `curl -i -H "Accept: application/vnd.api+json" -H "Content-Type: application/vnd.api+json" -H "Authorization: true" https://wdzgnf4au8.execute-api.us-west-2.amazonaws.com/prod/securityGroups`
+
 File directory:
 * _ec2-security-groups_: NPM Module
     * _test/test.js_ : Mocha + Chai + Proxyquire tests 

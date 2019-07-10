@@ -3,11 +3,18 @@ const {fetchSecurityGroups, constructSecurityGroupsArray} = require('ec2-securit
 exports.handler = async (event, ctx) => {
     // Get awsRequestId and use as ID for json-api response via destructuring
     const {awsRequestId} = ctx;
-    const jsonApiHeaders = {"Content-Type": "application/vnd.api+json"};
+    const jsonApiHeaders = {"Content-Type": "application/vnd.api+json"}; // if no request headers then immediately return
+
+    if (!event.headers) return {
+        statusCode: "415", headers: jsonApiHeaders,
+        body: JSON.stringify({errors: [{status: "415", detail: "Unsupported Media Type"}]})
+    };
+    // set event headers keys to lowercase
+    const eventHeaders = Object.keys(event.headers).reduce((acc, curr) =>
+        (acc[curr.toLowerCase()] = event.headers[curr], acc), {});
 
     // client's requests need to specify the content type, and that content type needs to be vnd.api+json
-    if (!event.headers ||
-        event.headers["Content-Type"] !== "application/vnd.api+json") {
+    if (eventHeaders["content-type"] !== "application/vnd.api+json") {
         return {
             statusCode: "415", headers: jsonApiHeaders,
             body: JSON.stringify({errors: [{status: "415", detail: "Unsupported Media Type"}]})
@@ -16,7 +23,7 @@ exports.handler = async (event, ctx) => {
     // regex for finding json api header with 0 or more whitespace then a ; after it (i.e. media params)
     let acceptMediaParamsRegex = /application\/vnd\.api\+json(?!\s*;)/;
     // if a client requests with accept header then they must not have any appended media params
-    if (event.headers["Accept"] && !acceptMediaParamsRegex.test(event.headers["Accept"])) {
+    if (eventHeaders["accept"] && !acceptMediaParamsRegex.test(eventHeaders["accept"])) {
         return {
             statusCode: "406", headers: jsonApiHeaders,
             body: JSON.stringify({errors: [{status: "406", detail: "Not Acceptable"}]})
